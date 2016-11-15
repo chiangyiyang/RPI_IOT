@@ -21,7 +21,7 @@ GPIO.setwarnings(False)
 GPIO.setup(relay, GPIO.OUT)
 
 
-# main() function 
+# main() function     
 def main():
     f = open('db_file', 'w+')
     while True:
