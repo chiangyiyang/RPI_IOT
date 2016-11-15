@@ -22,7 +22,7 @@ while True:
     # tmp1 = int(round(readadc(0) / 1.024))q
     # tmp2 = int(round(readadc(1) / 1.024))
     # tmp3 = int(round(readadc(2) / 1.024))
-    tmp4 = int(round(readadc(3) / 1.024))   # MQ2 in port:3
+    tmp4 = int(round(readadc(3) / 1.024))  # MQ2 in port:3
     print "gas:", tmp4
     count = count + 1
     time.sleep(1)

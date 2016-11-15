@@ -6,36 +6,54 @@ import RPi.GPIO as GPIO
 from time import sleep
 from random import randint as ri
 import Adafruit_DHT
+import spidev
+
+spi = spidev.SpiDev()
+spi.open(0, 0)
+
+
+def readadc(adcnum):
+    if adcnum > 7 or adcnum < 0:
+        print "wrong port num"
+        return -1
+    r = spi.xfer2([1, 8 + adcnum << 4, 0])
+    adcount = ((r[1] & 3) << 8) + r[2]
+    return adcount
+
 
 def getSensorData():
-  RH, T = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, 23)
-  # return dict
-  return (str(RH),str(T))
+    RH, T = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, 23)
+    # return dict
+    return (str(RH), str(T))
+
 
 # main() function
 def main():
-  # use sys.argv if needed
-  if len(sys.argv) < 2:
-    print('Usage: python http_get.py PRIVATE_KEY')
-    exit(0)
-  
-  print 'starting...'
-  baseUrl = 'https://api.thingspeak.com/update?api_key=%s' % sys.argv[1]
-  
-  while True:
-    try:
-      RH, T = getSensorData()
-      print RH
-      print T
-      f = urllib2.urlopen(baseUrl + 
-                          "&field1=%s&field2=%s" % (RH, T))
-      print f.read()
-      f.close()
-      sleep(30)
-    except:
-      print "\nExiting"
-      break
+    # use sys.argv if needed
+    if len(sys.argv) < 2:
+        print('Usage: python http_get.py PRIVATE_KEY')
+        exit(0)
+    
+    print 'starting...'
+    baseUrl = 'https://api.thingspeak.com/update?api_key=%s' % sys.argv[1]
+    
+    while True:
+        try:
+            RH, T = getSensorData()
+            print RH
+            print T
+            gas = int(round(readadc(3) / 1.024))  # MQ2 in port:3
+            print "gas:", gas
+            f = urllib2.urlopen(baseUrl +
+                                "&field1=%s&field2=%s&field3=%s" % (RH, T, gas))
+            print f.read()
+            f.close()
+            sleep(30)
+        except:
+            print "\nExiting"
+            break
 
-#call main
+
+# call main
 if __name__ == '__main__':
-  main()
+    main()
