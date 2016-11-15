@@ -48,7 +48,7 @@ def main():
                                 "&field1=%s&field2=%s&field3=%s" % (RH, T, gas))
             print f.read()
             f.close()
-            sleep(30)
+            sleep(15)
         except:
             print "\nExiting"
             break
