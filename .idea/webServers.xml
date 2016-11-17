@@ -2,8 +2,24 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="56f37ef3-281e-46ff-b23e-7c661fc6a540" name="RPI 58.252" url="http://192.168.58.252">
+      <webServer id="56f37ef3-281e-46ff-b23e-7c661fc6a540" name="RPI 58.253" url="http://192.168.58.253">
+        <fileTransfer host="192.168.58.253" port="22" rootFolder="/home/pi" accessType="SFTP" username="pi">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="116393c2-87ec-4284-9d21-d9a15ad996b7" name="RPI 58.252" url="http://192.168.58.252">
         <fileTransfer host="192.168.58.252" port="22" rootFolder="/home/pi" accessType="SFTP" username="pi">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="3da10584-c834-4f7f-ab04-e2ff7ed32cab" name="RPI 58.248" url="http://192.168.58.248">
+        <fileTransfer host="192.168.58.248" port="22" rootFolder="/home/pi" accessType="SFTP" username="pi">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>

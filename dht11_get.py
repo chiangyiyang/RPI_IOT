@@ -13,7 +13,6 @@ import json
 READ_API_KRY = "XIJWWMVIG7IBQE8H"
 CHANNEL_ID = "178333"
 
-
 relay = 38
 
 GPIO.setmode(GPIO.BOARD)

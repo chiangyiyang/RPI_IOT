@@ -9,10 +9,24 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="RPI 58.248">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/yiyang/projects" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="RPI 58.252">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/pi/yiyang/projects" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/yiyang/projects" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="RPI 58.253">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/yiyang/projects" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
