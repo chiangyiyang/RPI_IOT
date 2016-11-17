@@ -39,7 +39,8 @@ def update_info():
     print msg
     var.set(msg)
     update_chart(RH, T)
-    pnlMain.update_idletasks()
+    # pnlMain.update_idletasks()
+    pnlMain.after(1000, update_info)
 
 
 pnlMain = PanedWindow(orient=VERTICAL)
@@ -74,5 +75,4 @@ cavHT = Canvas(pnlHT, bg="blue", height=100, width=200)
 update_chart(RH, T)
 pnlHT.add(cavHT)
 
-pnlMain.after(1000, update_info)
 pnlMain.mainloop()
