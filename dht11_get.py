@@ -13,11 +13,11 @@ import json
 READ_API_KRY = "XIJWWMVIG7IBQE8H"
 CHANNEL_ID = "178333"
 
-relay = 38
+RELAY_PIN = 38
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
-GPIO.setup(relay, GPIO.OUT)
+GPIO.setup(RELAY_PIN, GPIO.OUT)
 
 
 # main() function     
@@ -38,9 +38,9 @@ def main():
             # print "End of Record"
             print data['field4']
             if data['field4'] == '1':
-                GPIO.output(relay, GPIO.HIGH)
+                GPIO.output(RELAY_PIN, GPIO.HIGH)
             else:
-                GPIO.output(relay, GPIO.LOW)
+                GPIO.output(RELAY_PIN, GPIO.LOW)
             
             f.write(str(data))
             

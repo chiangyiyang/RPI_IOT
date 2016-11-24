@@ -4,14 +4,13 @@
 import RPi.GPIO as GPIO
 import time
 
-pirPin = 11
+PIR_PIN = 11
 
 GPIO.setmode(GPIO.BOARD)
-GPIO.setwarnings(False)
-GPIO.setup(pirPin, GPIO.IN)
+GPIO.setup(PIR_PIN, GPIO.IN)
 
 while True:
-    print (GPIO.input(pirPin))
+    print (GPIO.input(PIR_PIN))
     time.sleep(0.5)
 
 

@@ -38,6 +38,11 @@ bus = smbus.SMBus(1)
 spi = spidev.SpiDev()
 spi.open(0, 0)
 
+PIR_PIN = 11
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(PIR_PIN, GPIO.IN)
+
+
 
 def converToNumber(data):
     # Simple function to convert 2 bytes of data
@@ -80,12 +85,18 @@ def main():
             RH, T = getSensorData()
             print RH
             print T
+            
             gas = int(round(readadc(3) / 1.024))  # MQ2 in port:3
             print "gas:", gas
+            
             light = "%.1f" % (readLight())
             print "Light Level : " + light + " lx"
+            
+            pir = str(GPIO.input(PIR_PIN))
+            print "PIR: " + pir
+            
             f = urllib2.urlopen(baseUrl +
-                                "&field1=%s&field2=%s&field3=%s&field5=%s" % (RH, T, gas, light))
+                                "&field1=%s&field2=%s&field3=%s&field5=%s&field6=%s" % (RH, T, gas, light, pir))
             print "HTTP Response: " + f.read()
             f.close()
             sleep(20)
