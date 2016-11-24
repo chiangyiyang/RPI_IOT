@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="RPI 58.253">
+  <component name="PublishConfigData" autoUpload="Always" serverName="RPI 58.249">
     <serverData>
       <paths name="Pi 3 192.168.43.143">
         <serverdata>
@@ -10,6 +10,13 @@
         </serverdata>
       </paths>
       <paths name="RPI 58.248">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/yiyang/projects" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="RPI 58.249">
         <serverdata>
           <mappings>
             <mapping deploy="/yiyang/projects" local="$PROJECT_DIR$" web="/" />

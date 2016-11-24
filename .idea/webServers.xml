@@ -26,6 +26,14 @@
           <option name="port" value="22" />
         </fileTransfer>
       </webServer>
+      <webServer id="66313c64-a850-491b-b559-9a336d88938e" name="RPI 58.249" url="http://192.168.58.249">
+        <fileTransfer host="192.168.58.249" port="22" rootFolder="/home/pi" accessType="SFTP" username="pi">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>
