@@ -8,6 +8,24 @@ from random import randint as ri
 import Adafruit_DHT
 import spidev
 import smbus
+from MFR522 import MFRC522
+import signal
+
+
+# Capture SIGINT for cleanup when the script is aborted
+def end_read(signal, frame):
+    global continue_reading
+    print "Ctrl+C captured, ending read."
+    continue_reading = False
+    GPIO.cleanup()
+
+
+# Hook the SIGINT
+signal.signal(signal.SIGINT, end_read)
+
+# Create an object of the class MFRC522
+MIFAREReader = MFRC522.MFRC522()
+
 
 # Define some constants from the datasheet
 DEVICE = 0x23  # Default device I2C address
@@ -69,7 +87,7 @@ def getSensorData():
     # return dict
     return (str(RH), str(T))
 
-
+uid = [0,0,0,0]
 # main() function
 def main():
     # use sys.argv if needed
@@ -95,12 +113,33 @@ def main():
             pir = str(GPIO.input(PIR_PIN))
             print "PIR: " + pir
             
+            # Scan for cards    
+            (status, TagType) = MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
+            # If a card is found
+            if status == MIFAREReader.MI_OK:
+                print "Card detected"
+                # print status
+            # Get the UID of the card
+            (status, uid) = MIFAREReader.MFRC522_Anticoll()
+            # print status
+            # If we have the UID, continue
+            if status == MIFAREReader.MI_OK:
+                # Print UID
+                print "Card read UID: " + str(uid[0]) + "," + str(uid[1]) + "," + str(uid[2]) + "," + str(uid[3])
+                print "Card read UID: " + ''.join(str(e) for e in uid)
+            else:
+                uid = [0,0,0,0]
+                
+            # f = urllib2.urlopen(baseUrl +
+            #                     "&field1=%s&field2=%s&field3=%s&field5=%s&field6=%s" % (RH, T, gas, light, pir))
             f = urllib2.urlopen(baseUrl +
-                                "&field1=%s&field2=%s&field3=%s&field5=%s&field6=%s" % (RH, T, gas, light, pir))
+                                "&field1=%s&field2=%s&field3=%s&field5=%s&field6=%s&field7=%s"
+                                % (RH, T, gas, light, pir, ''.join(str(e) for e in uid) ))
             print "HTTP Response: " + f.read()
             f.close()
             sleep(20)
         except:
+            GPIO.cleanup()
             print "\nExiting"
             break
 
